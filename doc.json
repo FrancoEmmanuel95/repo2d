@@ -1,0 +1,65 @@
+package Model;
+
+import java.util.Objects;
+
+public class Tag {
+
+    private String name;
+
+    public Tag(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || object.getClass() != this.getClass()) return false;
+        Tag tag = (Tag) object;
+        return Objects.equals(name, tag.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    // Implementación de equals y hashCode
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Autor autor = (Autor) o;
+        return Objects.equals(nombre, autor.nombre) &&
+               Objects.equals(apellido, autor.apellido);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nombre, apellido);
+    }
+
+
+
+        // Metodo para extraer solo los tags y eliminarlos de duplicados
+        public Set<Tag> removeDuplicateTags(GenericWarehouse<Object> warehouse) {
+        Set<Tag> tagsSet = new HashSet<>();
+
+        // Iterar sobre los elementos almacenados
+        for (Object item : warehouse.getList()) {
+            if (item instanceof Tag) {
+                tagsSet.add((Tag) item);  // Agregar solo los tags al HashSet
+            }
+        }
+
+          return tagsSet;
+        }
+}
